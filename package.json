@@ -18,7 +18,12 @@
   },
   "homepage": "https://github.com/konstantinovcharov/Weather-app-js#readme",
   "devDependencies": {
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.2",
     "webpack": "^5.76.2",
     "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "weather-icons": "github:erikflowers/weather-icons"
   }
 }
