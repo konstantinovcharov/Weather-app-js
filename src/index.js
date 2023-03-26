@@ -1,7 +1,5 @@
 import 'weather-icons/css/weather-icons.css'
 
-console.log("running")
-
 const Api_Key = "214d6c547f73c737ca58bf19a465d50f";
 
 async function getWeatherData(e) {
@@ -13,14 +11,6 @@ async function getWeatherData(e) {
         );
         const weatherData = await response.json();
         console.log(weatherData);
-        // const weatherData = {
-        //     city: weatherDataJSON.name,
-        //     country: weatherDataJSON.sys.country,
-        //     temperature: convertToCelsius(weatherDataJSON.main.temp) + "°",
-        //     temperatureMin: convertToCelsius(weatherDataJSON.main.temp_min),
-        //     temperatureMax: convertToCelsius(weatherDataJSON.main.temp_max),
-        //     weatherDescription: weatherDataJSON.weather[0].description
-        // }
 
         city.innerHTML = "City: " + weatherData.name + ', ' + weatherData.sys.country;
         temperature.innerHTML = "Current Temperature: " + convertToCelsius(weatherData.main.temp) + "°";
@@ -35,44 +25,46 @@ async function getWeatherData(e) {
     }
 }
 
-
-
+// Kelvin -> Celsius
 function convertToCelsius(temp) {
     let cell = Math.floor(temp - 273.15);
     return cell;
 }
 
-// function getWeatherIcon(weatherId) {
-//     switch (true) {
-//         case weatherId >= 801 && weatherId <= 804:
-//     }
-// }
+//
+const weatherContainer = document.querySelector('div');
 
-
+//Weather Div
 const weatherDiv = document.createElement('div');
 
-const city = document.createElement('h1');
+//Which City
+const city = document.createElement('div');
+city.classList.add('city')
 city.innerHTML = "City:";
 weatherDiv.appendChild(city);
-document.body.appendChild(weatherDiv);
-// const weatherIcon = document.createElement('i');
-// weatherIcon.classList.add("wi", "wi-day-sunny")
-// weatherDiv.appendChild(weatherIcon);
-// const countryCode = document.createElement('h1');
+weatherContainer.appendChild(weatherDiv);
 
-const temperature = document.createElement('h2');
+//Current Temperature
+const temperature = document.createElement('div');
+temperature.classList.add('temperatureCurrent')
 temperature.innerHTML = "Current Temperature: ";
 weatherDiv.appendChild(temperature);
 
-const minTemperature = document.createElement('h2');
+//Min Temperature
+const minTemperature = document.createElement('div');
+minTemperature.classList.add('temperatureMin')
 minTemperature.innerHTML = "Min Temperature: ";
 weatherDiv.appendChild(minTemperature);
 
-const maxTemperature = document.createElement('h2');
+//Max Temperature
+const maxTemperature = document.createElement('div');
+maxTemperature.classList.add('temperatureMax')
 maxTemperature.innerHTML = "Max Temperature: ";
 weatherDiv.appendChild(maxTemperature);
 
-const weatherDescription = document.createElement('h3');
+//Weather Description
+const weatherDescription = document.createElement('div');
+weatherDescription.classList.add('weatherDescription')
 weatherDescription.innerHTML = "Weather Description: ";
 weatherDiv.appendChild(weatherDescription);
 
@@ -84,5 +76,22 @@ const weatherButton = document.querySelector('button');
 weatherButton.addEventListener('click', getWeatherData);
 
 
+// const weatherIcon = document.createElement('i');
+// weatherIcon.classList.add("wi", "wi-day-sunny")
+// weatherDiv.appendChild(weatherIcon);
+// const countryCode = document.createElement('h1');
 
+// function getWeatherIcon(weatherId) {
+//     switch (true) {
+//         case weatherId >= 801 && weatherId <= 804:
+//     }
+// }
 
+// const weatherData = {
+        //     city: weatherDataJSON.name,
+        //     country: weatherDataJSON.sys.country,
+        //     temperature: convertToCelsius(weatherDataJSON.main.temp) + "°",
+        //     temperatureMin: convertToCelsius(weatherDataJSON.main.temp_min),
+        //     temperatureMax: convertToCelsius(weatherDataJSON.main.temp_max),
+        //     weatherDescription: weatherDataJSON.weather[0].description
+        // }
