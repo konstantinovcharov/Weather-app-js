@@ -1,5 +1,6 @@
 import 'weather-icons/css/weather-icons.css';
 import { switchIcon } from './changeBgIcon';
+import './style.css';
 
 
 async function getWeatherData(e) {
