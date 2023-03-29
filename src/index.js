@@ -1,9 +1,11 @@
-import 'weather-icons/css/weather-icons.css'
+import 'weather-icons/css/weather-icons.css';
+import { switchIcon } from './changeBgIcon';
 
-const Api_Key = "214d6c547f73c737ca58bf19a465d50f";
 
 async function getWeatherData(e) {
     e.preventDefault();
+
+    const Api_Key = "214d6c547f73c737ca58bf19a465d50f";
 
     try {
         const response = await fetch(
@@ -13,9 +15,9 @@ async function getWeatherData(e) {
         console.log(weatherData);
 
         city.innerHTML = weatherData.name + ', ' + weatherData.sys.country;
-        temperature.innerHTML = convertToCelsius(weatherData.main.temp);
-        minTemperature.innerHTML = convertToCelsius(weatherData.main.temp_min);
-        maxTemperature.innerHTML = convertToCelsius(weatherData.main.temp_max);
+        temperature.innerHTML = convertToCelsiusFromKelvin(weatherData.main.temp);
+        minTemperature.innerHTML = convertToCelsiusFromKelvin(weatherData.main.temp_min);
+        maxTemperature.innerHTML = convertToCelsiusFromKelvin(weatherData.main.temp_max);
         weatherDescription.innerHTML = ""
             + weatherData.weather[0].description.charAt(0).toUpperCase()
             + weatherData.weather[0].description.slice(1);
@@ -30,27 +32,27 @@ async function getWeatherData(e) {
     }
 }
 
-//`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`
 
 // Kelvin -> Celsius
-function convertToCelsius(temp) {
-    let cell = Math.floor(temp - 273.15);
-    return cell;
+export function convertToCelsiusFromKelvin(tempK) {
+    let tempC = Math.floor(tempK - 273.15);
+    return tempC;
 }
 
-//
+
 const weatherContainer = document.querySelector('div');
+
+const cityInput = document.getElementById('city');
 
 //Weather Div
 const weatherDiv = document.createElement('div');
-weatherDiv.classList.add("weatherDiv")
+weatherDiv.classList.add("weatherDiv");
 
 //Which City
 const city = document.createElement('div');
 city.classList.add('city')
 //city.innerHTML = "City:";
 weatherDiv.appendChild(city);
-weatherContainer.appendChild(weatherDiv);
 
 //Current Temperature
 const temperature = document.createElement('div');
@@ -82,9 +84,6 @@ weatherDescription.classList.add('weatherDescription')
 //weatherDescription.innerHTML = "Weather Description: ";
 weatherDiv.appendChild(weatherDescription);
 
-//User Input
-const cityInput = document.getElementById('city');
-
 //Get Weather Button
 const weatherButton = document.querySelector('button');
 weatherButton.addEventListener('click', getWeatherData);
@@ -95,14 +94,16 @@ weatherIconDiv.setAttribute("id", "weatherIcon")
 //weatherIconDiv.classList.add('weatherIcon');
 weatherDiv.appendChild(weatherIconDiv);
 
+weatherContainer.appendChild(weatherDiv);
+
 const body = document.querySelector('body');
 
-//Convert Button
+
+//Convert C <-> F Button
 const convertButton = document.createElement('button');
 convertButton.classList.add("convertBtn");
 convertButton.textContent = "Convert to Fahrenheit";
 weatherDiv.appendChild(convertButton);
-let isFahrenheit;
 
 convertButton.addEventListener('click', () => {
     const temperatureElements = document.querySelectorAll('.temperature');
@@ -111,11 +112,11 @@ convertButton.addEventListener('click', () => {
         const temperatureValue = parseFloat(temperature.textContent);
 
         if (isFahrenheit) {
-            const celsiusValue = (temperatureValue - 32) * (5/9);
+            const celsiusValue = (temperatureValue - 32) * (5 / 9);
             temperature.textContent = celsiusValue.toFixed(0);
             convertButton.textContent = 'Convert to Fahrenheit';
         } else {
-            const fahrenheitValue = temperatureValue * (9/5) + 32;
+            const fahrenheitValue = temperatureValue * (9 / 5) + 32;
             temperature.textContent = fahrenheitValue.toFixed(0);
             convertButton.textContent = 'Convert to Celsius';
         }
@@ -124,58 +125,13 @@ convertButton.addEventListener('click', () => {
     isFahrenheit = !isFahrenheit;
 })
 
-//Icon switch function
-function switchIcon(rangeId) {
-    weatherIconDiv.className = "";
-    body.style.backgroundPosition = "";
-    body.style.backgroundSize = "";
-    body.style.backgroundImage = "";
 
-    switch (true) {
-        case rangeId >= 200 && rangeId <= 232:
-            weatherIconDiv.setAttribute("class", "wi wi-thunderstorm")
-            changeBackgroundImage("center", "cover", "../Images/Thunderstorm-min.jpg")
-            break;
 
-        case rangeId >= 300 && rangeId <= 321:
-            weatherIconDiv.setAttribute("class", "wi wi-sprinkle")
-            changeBackgroundImage("center", "cover", "../Images/Drizzle-min.jpg")
-            break;
 
-        case rangeId >= 500 && rangeId <= 531:
-            weatherIconDiv.setAttribute("class", "wi wi-rain")
-            changeBackgroundImage("center", "cover", "../Images/Rain-min.jpg")
-            break;
+let isFahrenheit;
 
-        case rangeId >= 600 && rangeId <= 622:
-            weatherIconDiv.setAttribute("class", "wi wi-snow")
-            changeBackgroundImage("center", "cover", "../Images/blizzards-min.jpg")
-            break;
 
-        case rangeId >= 701 && rangeId <= 781:
-            weatherIconDiv.setAttribute("class", "wi wi-fog")
-            changeBackgroundImage("center", "cover", "../Images/foggy-min.jpg")
-            break;
 
-        case rangeId === 800:
-            weatherIconDiv.setAttribute("class", "wi wi-day-sunny")
-            changeBackgroundImage("center", "cover", "../Images/clearsky-min.jpg")
-            break;
-
-        case rangeId >= 801 && rangeId <= 804:
-            weatherIconDiv.setAttribute("class", "wi wi-cloudy")
-            changeBackgroundImage("center", "100vw auto", "../Images/cloudy-min.jpg")
-            break;
-
-    }
-}
-
-//Change Background elements
-function changeBackgroundImage(position, size, imageUrl) {
-    body.style.backgroundPosition = position;
-    body.style.backgroundSize = size;
-    body.style.backgroundImage = `url(${imageUrl})`;
-}
 
 //Weather Background Images
 // const weatherBackgrounds = [
