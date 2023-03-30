@@ -22,7 +22,7 @@
 @font-face {
   font-family: 'weathericons';
   src: url(bb2ec001c20cf752f852.eot);
-  src: url(bb2ec001c20cf752f852.eot?#iefix) format('embedded-opentype'), url(e218aee6928fe3da9ed6.woff2) format('woff2'), url(371511ddba5fdac0538c.woff) format('woff'), url(0942d1e1c447d6ce3ffc.ttf) format('truetype'), url(d9b1f1dbe2bc6eda8243.svg#weather_iconsregular) format('svg');
+  src: url(bb2ec001c20cf752f852.eot?#iefix) format('embedded-opentype'), url(e218aee6928fe3da9ed6.woff2) format('woff2'), url(371511ddba5fdac0538c.woff) format('woff'), url(0942d1e1c447d6ce3ffc.ttf) format('truetype'), url(1341a15172cec8dae06e.svg#weather_iconsregular) format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -1870,7 +1870,7 @@
 }
 
 body {
-    background-image: url(7d0727a16d2797f6ffb8.jpg);
+    background-image: url(3a27cd459666653a1693.jpg);
     background-position: center;
     background-size: cover;
 }

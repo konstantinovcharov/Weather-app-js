@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        index: './src/index.js',        
+        index: './src/index.js',
         changeBG: './src/changeBgIcon.js',
     },
     output: {
@@ -17,31 +17,23 @@ module.exports = {
         rules: [
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'Images/',
-                        }
-                    }
-                ]
+                type: 'asset/resource',         
+
             },
             {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            }
+            },
 
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-          title: 'My App',
-          template: 'src/index.html'
+            title: 'My App',
+            template: 'src/index.html'
         }),
         new MiniCssExtractPlugin({
             filename: 'style.css',
-          })
-      ]
+        })
+    ]
 };

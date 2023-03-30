@@ -31,7 +31,7 @@
 }
 
 body {
-    background-image: url(../Images/BaseWeather2-min.jpg);
+    background-image: url(./Images/BaseWeather2-min.jpg);
     background-position: center;
     background-size: cover;
 }
